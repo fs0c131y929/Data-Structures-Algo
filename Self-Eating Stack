@@ -1,0 +1,40 @@
+class SelfEatingStack():
+    def __init__(self):
+        self.stack = []
+
+    def push(self, item):
+        self.stack.append(item)
+        self.eat()
+        
+    def pop(self): 
+        if not self.stack:
+            return None
+        item = self.stack.pop()
+        if self.stack:
+            self.stack[-1] + item
+        return item
+
+    def top(self):
+        return self.stack[-1] if not self.empty() else None
+
+    def size(self):
+        return len(self.stack)
+
+    def empty_stack(self):
+        return len(self.stack) == 0
+    
+    def eat(self):
+        while len(self.stack) >= 3 and self.stack[-1] == self.stack[-2] == self.stack[-3]:
+            self.stack.pop(3)
+
+stack = SelfEatingStack()
+stack.push(1)
+stack.push(2)
+stack.push(2)
+stack.push(2)
+stack.push(1)
+stack.push(1)
+stack.push(1)
+print(stack.stack)
+ 
+
