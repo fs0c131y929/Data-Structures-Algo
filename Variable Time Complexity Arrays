@@ -1,0 +1,50 @@
+#Brute Force 
+def find_unique_brute_force(arr):
+    for i in range(len(arr)):
+        unique_val = True
+        for j in range(len(arr)):
+            if i != j and arr[i] == arr[j]:
+                unique_val = False
+                break 
+        if unique_val:
+            return arr[i] 
+
+array = [3, 3, 3, 3, 6, 6, 7]
+unique = find_unique_brute_force(array)
+print(f'The unique element in the array is: {unique}')           
+ 
+
+
+
+#No More than O(1)
+def find_unique(arr):
+    unique_element = 0
+    for num in arr:
+        unique_element ^= num 
+    return unique_element 
+
+array = [1, 0, 1, 2, 4, 2, 4] 
+unique = find_unique(array)
+print(f'The unique element in the array is: {unique}')  
+
+
+
+
+#O(n) space and complexity
+def find_unique(arr):
+    hash_map = {}
+    for num in arr:
+        if num in hash_map:
+            hash_map[num] += 1
+        else:
+            hash_map[num]= 1    
+
+    for num, order in hash_map.items():
+        if order ==1:
+            return num 
+
+array = [1, 1, 1, 1, 1, 1, 1, 1, 2] 
+unique = find_unique(array)
+print(f'The unique element in the array is: {unique}')              
+    
+    
