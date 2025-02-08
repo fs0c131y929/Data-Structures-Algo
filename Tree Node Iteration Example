@@ -1,0 +1,53 @@
+class TreeNode:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+def tree_height(node):
+    if node is None:
+        return 0
+    else:
+        left_tree_height = tree_height(node.left)
+        right_tree_height = tree_height(node.right)
+        return max(left_tree_height, right_tree_height) + 1
+    
+
+def leaf(node):
+    if node is None:
+        return 0
+    elif node.left is None and node.right is None:
+        return 1
+    else:
+        return leaf(node.left) + leaf(node.right)  
+    
+
+def full(node):
+    if node is None:
+        return True
+    elif node.left is None and node.right is None:
+        return True
+    elif node.left is not None and node.right is not None:
+        return full(node.left) and full(node.right)        
+    else: 
+        return False
+
+def balanced(node):
+    if node is None:
+        return True
+    left_tree_height = tree_height(node.left)
+    right_tree_height = tree_height(node.right) 
+    if abs(left_tree_height - right_tree_height) <= 1 and balanced(node.left) and balanced(node.right):
+        return True
+    else:
+        return False
+    
+def tree_info(node):
+    print('Height of the Tree:', tree_height(node)- 1)
+    print('Number of tree nodes:',leaf(node))
+    print('Is Full:', 'Yes' if full(node) else 'No')
+    print('Is Balanced?', 'Yes' if balanced(node) else 'No')
+
+root = TreeNode(3, TreeNode(9, TreeNode(4), TreeNode(5)), TreeNode(8))
+
+tree_info(root)
