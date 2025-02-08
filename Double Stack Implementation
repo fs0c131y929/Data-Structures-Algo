@@ -1,0 +1,86 @@
+# Two Stacks In a List| Last in, First Out
+# Author: Michael Anyaegbunam
+
+class DoubleStack:
+    def __init__(self, n): 
+        self.data = []
+        self.size = n
+
+
+    def push_left(self, item):
+        if len(self.data) < self.size:
+            self.data.insert(0, item)
+        else:
+            print('Overflow detected, cannot push to left stack.')
+
+    def push_right(self, item):
+        if len(self.data) < self.size:
+            self.data.append(item)
+        else:
+            print('Overflow detected! Cannot push to right stack')    
+            
+
+
+    def pop_left(self):
+        if len(self.data) == 0:
+            raise Exception("Element has been removed from the top.")
+        return self.data.pop(0)       
+
+
+    def pop_right(self):
+        if len(self.data) == 0:
+            raise Exception("Element has been removed from the bottom.")
+        return self.data.pop()
+    
+
+    
+    def len_left(self):
+        return len(self.data) 
+    
+    def len_right(self):
+        return len(self.data) - self.len_left()
+    
+
+
+    def transfer_to_left(self, n): 
+        if n > len(self.data):
+            item = self.data.pop()
+            self.data.insert(0, item)
+
+    def transfer_ro_right(self, n):
+        if n > len(self.data):
+            item = self.data.pop(0)
+            self.data.append(item) 
+
+def driver_code():
+     stack = DoubleStack(12)
+
+     stack.push_left(1)
+     stack.push_left(2)
+     print('New stack is:', stack.data)
+
+     stack.push_right(4)
+     stack.push_right(6)
+     print('New stack is: ', stack.data)
+
+     print('Pop from left: ', stack.pop_left())
+     print('Remaining stack after pop: ', stack.data)
+
+     print('Pop from right: ', stack.pop_right())
+     print('Remaining stack after pop: ', stack.data)
+
+     print('Length of left stack: ', stack.len_left())
+     print('Length of right stack: ', stack.len_right())
+
+     stack.transfer_to_left(1)
+     print('Transferred', stack.data)
+        
+     stack.transfer_ro_right(2)
+     print('Transferred: ', stack.data)
+
+driver_code()    
+         
+
+      
+
+     
