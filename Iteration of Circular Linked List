@@ -1,0 +1,27 @@
+class Node: #iteration of a circular linked list
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+#"optp" = One Potato, Two Potato, "m_node"= main node/starting point
+def optp(n, k): 
+    head = Node(0)
+    m_node = head
+    for i in range(1, n):
+        m_node.next = Node(i)
+        m_node = m_node.next
+        # Here, the circle becomes apparent. 'None' Within the class node verifies that there is a starting point within this circle. Since m_node = Node(i), it makes sense that m_node also equals Node(0)
+    m_node.next = head    
+
+    while m_node.next != m_node:
+        for _ in range(k - 1):
+            m_node = m_node.next
+            #Here, every player is eliminated since k is being subtracted by 1 
+        m_node.next = m_node.next.next
+
+    return m_node.data     
+n = 11
+k = 8
+#"8" should be eliminated   
+
+print('The last remaining person is: ', optp(n, k))
