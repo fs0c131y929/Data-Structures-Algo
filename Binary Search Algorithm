@@ -1,0 +1,25 @@
+file = open('words.txt', 'r')
+words = file.read().splitlines()
+print('Numer of words read:', len(words))
+
+def binary_search(arr, target):
+    low = 0 
+    high = len(arr) - 1
+    iterations = 1
+
+    while low <= high:
+        mid = (low + high)//2
+        if target == arr[mid]:
+            print(f'Target = {target}, Found at index = {mid}, Number of iterations = {iterations}')
+        elif target < arr[mid]:
+            high = mid - 1
+        else:
+            low = mid + 1
+
+    return -1            
+
+target = input('Enter search key: ').lower()
+
+while target != 'exit':
+    binary_search(words, target)
+    target = input('Enter search key: ').lower
