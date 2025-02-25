@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self, val=None):
+        self.data = val
+        self.next = None
+
+def insert_and_sort(node, insertval):
+    new_node = Node(insertval)    
+
+    
+    if node is None: 
+        new_node.next = new_node
+        return new_node
+
+    curr = node
+
+    while True:
+        if curr.data <= insertval <= curr.next.data:
+            break 
+
+        elif curr.data > curr.next.data and (insertval >= curr.data or insertval <= curr.next.data):
+            break
+
+        curr = curr.next
+
+        if curr == node:
+            break
+
+    
+    new_node.next = curr.next
+    curr.next = new_node
+    return node
+
+if __name__ == "__main__":
+    head = Node(3)
+    second = Node(4)
+    third = Node(1)
+
+    head.next = second
+    second.next = third
+    third.next = head
+
+    head = insert_and_sort(head, 2)
+    curr = head
+    print(curr.data)
+    curr = curr.next
+    while curr != head:
+        print(curr.data)
+        curr = curr.next
+    print(head)
